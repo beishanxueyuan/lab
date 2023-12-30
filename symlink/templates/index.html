@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>文件上传和下载</title>
+</head>
+
+<body>
+    <h1>文件上传和下载</h1>
+    <form id="upload-form" enctype="multipart/form-data">
+        <input type="file" id="file-input" accept=".zip">
+        <input type="submit" value="上传">
+    </form>
+
+    <h2>解压后的文件列表:</h2>
+    <ul id="file-list"></ul>
+
+    <script>
+        document.getElementById('upload-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            var fileInput = document.getElementById('file-input');
+            var file = fileInput.files[0];
+            if (file) {
+                var formData = new FormData();
+                formData.append('file', file);
+
+                fetch('/upload', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        var fileList = data.files;
+                        var fileListElement = document.getElementById('file-list');
+                        fileListElement.innerHTML = '';
+
+                        fileList.forEach(function (file) {
+                            var listItem = document.createElement('li');
+                            var downloadLink = document.createElement('a');
+                            downloadLink.href = '/download/' + file;
+                            downloadLink.innerHTML = file;
+                            listItem.appendChild(downloadLink);
+                            fileListElement.appendChild(listItem);
+                        });
+                    })
+                    .catch(error => console.error('上传错误:', error));
+            } else {
+                console.log('未选择文件！');
+            }
+        });
+    </script>
+</body>
+
+</html>
